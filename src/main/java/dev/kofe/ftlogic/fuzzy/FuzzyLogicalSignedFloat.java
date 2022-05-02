@@ -1,9 +1,10 @@
-package dev.kofe.fuzzy;
+package dev.kofe.ftlogic.fuzzy;
 
 /*
- * The fuzzy logic interface with float type of values that should be in [-1..1]
- * kofe.dev, 2022
+ *  Temporal fuzzy logic API
+ *  kofe.dev, 2022
  */
+
 public interface FuzzyLogicalSignedFloat extends FuzzyLogical<Float> {
 
     /**

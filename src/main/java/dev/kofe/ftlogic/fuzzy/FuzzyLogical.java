@@ -1,4 +1,9 @@
-package dev.kofe.fuzzy;
+package dev.kofe.ftlogic.fuzzy;
+
+/*
+ *  Temporal fuzzy logic API
+ *  kofe.dev, 2022
+ */
 
 /**
  * The common fuzzy logic algebra

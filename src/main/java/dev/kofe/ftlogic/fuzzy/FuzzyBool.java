@@ -1,7 +1,7 @@
-package dev.kofe.fuzzy;
+package dev.kofe.ftlogic.fuzzy;
 
 /*
- *  Fuzzy logic class with float values that are between -1 and +1
+ *  Temporal fuzzy logic API
  *  kofe.dev, 2022
  */
 
@@ -12,7 +12,15 @@ import java.util.function.Function;
 public class FuzzyBool implements FuzzyLogicalSignedFloat {
 
     @Getter
-    private float truth;
+    private float truth = 0;
+
+    public FuzzyBool () {
+
+    }
+
+    public FuzzyBool (float truth) {
+        setTruth(truth);
+    }
 
     /**
      * Default trigger function set the hard rule: if argument is 1 then trigger returns true
@@ -124,6 +132,45 @@ public class FuzzyBool implements FuzzyLogicalSignedFloat {
        }
 
        return result;
+    }
+
+    public boolean trigger() {
+        boolean result = false;
+
+        if (isValueValid(this.truth)) {
+            result = triggerFunction.apply(this.truth);
+        }
+
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object object2) {
+
+        if (object2 == null) {
+            return false;
+        }
+
+        if (object2.getClass() != this.getClass()) {
+            return false;
+        }
+
+        final FuzzyBool obj = (FuzzyBool) object2;
+        if (this.getTruth() == obj.getTruth() && this.getTriggerFunction().equals(obj.getTriggerFunction())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        final int q1 = 105;
+        final int q2 = 93;
+        int hash = q1 + q2;
+        hash = q2 * hash * (int)this.truth + (int) Math.abs(this.truth);
+        hash = hash + this.triggerFunction.toString().length();
+        return hash;
     }
 
 }

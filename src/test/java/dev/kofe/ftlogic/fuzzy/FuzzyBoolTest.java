@@ -1,4 +1,9 @@
-package dev.kofe.fuzzy;
+package dev.kofe.ftlogic.fuzzy;
+
+/*
+ *  Temporal fuzzy logic API
+ *  kofe.dev, 2022
+ */
 
 import org.junit.jupiter.api.Test;
 import java.lang.reflect.Field;
@@ -139,6 +144,42 @@ class FuzzyBoolTest {
     void defaultTriggerShouldReturnTrueIfValueIsPositiveOne() {
 
         assertTrue(() -> testingVar.trigger(1.0F));
+
+    }
+
+    // equal
+
+    @Test
+    void shouldBeFalseIfNoEquals () {
+
+        FuzzyBool fuzzyBool1 = new FuzzyBool(0.2F);
+        FuzzyBool fuzzyBool2 = new FuzzyBool();
+
+        assertFalse(fuzzyBool1.equals(fuzzyBool2));
+
+        fuzzyBool1.setTruth(-0.35F);
+        fuzzyBool2.setTruth(-0.35F);
+        fuzzyBool1.setTriggerFunction((fuzzyTruth) -> fuzzyTruth > 0);
+        fuzzyBool2.setTriggerFunction((fuzzyTruth) -> fuzzyTruth <= 1);
+
+        assertFalse(fuzzyBool1.equals(fuzzyBool2));
+
+        fuzzyBool1.setTruth(-0.35F);
+        fuzzyBool2.setTruth(+0.12F);
+        fuzzyBool1.setTriggerFunction((fuzzyTruth) -> fuzzyTruth > 0);
+        fuzzyBool2.setTriggerFunction((fuzzyTruth) -> fuzzyTruth > 0);
+
+        assertFalse(fuzzyBool1.equals(fuzzyBool2));
+
+    }
+
+    @Test
+    void shouldBeTrueIfEquals () {
+
+        FuzzyBool fuzzyBool1 = new FuzzyBool(0.2F);
+        FuzzyBool fuzzyBool2 = new FuzzyBool(0.2F);
+
+        assertTrue(fuzzyBool1.equals(fuzzyBool2));
 
     }
 
