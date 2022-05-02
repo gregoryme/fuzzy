@@ -33,9 +33,9 @@ public class TemporalFuzzyBoolFactory implements ContainerFuzzyBoolTime {
         this.timeFunction = timeFunction;
     }
 
-    /**Instant instant
-     * Method get(Instant instant) produces FuzzyBool object according to the time function
-     * @param instant is definite timeMethod  produces FuzzyBool object according to the time function
+    /**
+     * Method get(LocalDateTime time) produces FuzzyBool object according to the time function
+     * @param time is definite timeMethod  produces FuzzyBool object according to the time function
      * @return FuzzyBool object in state according to the time function and definite time
      */ 
     @Override
